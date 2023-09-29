@@ -44,12 +44,23 @@ function makeSound(key) {
 
 }
 
+function buttonAnimationFlash(currentKey) {
+    const activeButton = document.querySelector("." + currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function (){activeButton.classList.remove("pressed");}, 100);
+}
+
 for (let i=0; i<numberOfDrumButton; i++) {
     document.querySelectorAll("button")[i].addEventListener("click", function () {
-        makeSound(this.innerHTML);
+        const buttonInnerHTML = this.innerHTML;
+        makeSound(buttonInnerHTML);
+        buttonAnimationFlash(buttonInnerHTML);
     });
 }
 
 document.addEventListener("keydown", function (event) {
-    makeSound(event.key);
+    const keyPressed = event.key;
+    makeSound(keyPressed);
+    buttonAnimationFlash(keyPressed);
 });
+
